@@ -4,9 +4,11 @@ import random
 import cv2
 import numpy as np
 from PIL import Image
+from matplotlib import pyplot as plt
 
 from data.base_dataset import BaseDataset, get_params, get_transform
 from data.image_folder import make_dataset
+
 
 
 class SynUnalignedDataset(BaseDataset):
@@ -76,8 +78,9 @@ class SynUnalignedDataset(BaseDataset):
 
         # Apply guided filtering to refine the mask
         A_mask_filtered = cv2.ximgproc.guidedFilter(
-            guide=A_img_np, src=A_mask_np, radius=3, eps=1e-4, dDepth=-1
+            guide=A_img_np, src=A_mask_np, radius=1, eps=1e-2, dDepth=-1
         )
+
 
         # Set masked pixels in the shadow image to black
         A_img_np[A_mask_filtered > 125] = [0, 0, 0]
@@ -89,40 +92,49 @@ class SynUnalignedDataset(BaseDataset):
         A_img_np = A_img_np / 255.0
         a = np.array([w1_R, w1_G, w1_B]).reshape(1, 1, 3)
         b = np.array([b1_R, b1_G, b1_B]).reshape(1, 1, 3)
-        A_img_np_dark = np.clip(a * A_img_np + b, 0, 1)
+        A_img_np_dark = np.clip(a * A_img_np + b, 0.05, 1)
+        A_img_np_dark[A_mask_filtered > 125] = [0, 0, 0]
+
 
         # Process domain B image and mask
         B_img_np = np.array(B_img)
         B_mask_np = np.array(B_mask)
         B_mask_np_filtered = (
-            cv2.ximgproc.guidedFilter(
-                guide=B_img_np, src=B_mask_np, radius=3, eps=1e-4, dDepth=-1
-            )
-            / 255.0
+                cv2.ximgproc.guidedFilter(
+                    guide=B_img_np, src=B_mask_np, radius=2, eps=1e-2, dDepth=-1
+                ) / 255.0
         )
+
         B_mask_np_filtered[A_mask_filtered > 125] = 0
 
         # Binarize the matte mask
         B_matte_np = (B_mask_np_filtered > 0.5).astype(np.uint8)
-        B_matte_np_255 = (B_matte_np * 255).astype(np.uint8)
+        B_matte_np_ori = B_mask_np_filtered
+
+        B_matte_np_255 = (B_matte_np_ori * 255).astype(np.uint8)
         B_matte_np_pil = Image.fromarray(B_matte_np_255)
 
         # Expand filtered mask for broadcasting
-        B_mask_np_filtered_expand = np.expand_dims(B_mask_np_filtered, axis=-1)
+        B_mask_np_filtered_expand = np.expand_dims(B_matte_np, axis=-1)
 
         # Generate initial shadow image
         ini_shadow = (
             A_img_np * (1 - B_mask_np_filtered_expand)
             + A_img_np_dark * B_mask_np_filtered_expand
         )
-        ini_shadow[np.logical_or(A_mask_filtered > 125, B_matte_np == 0)] = [0, 0, 0]
-        ini_shadow = (np.clip(ini_shadow, 0, 1) * 255).astype(np.uint8)
+        ini_shadow = (np.clip(ini_shadow, 0.05, 1) * 255).astype(np.uint8)
+
+        ini_shadow[A_mask_filtered > 125] = [0, 0, 0]
+
+
         ini_shadow_pil = Image.fromarray(ini_shadow)
 
         # Generate initial shadow-free image
         ini_shadowfree = A_img_np.copy()
         ini_shadowfree[A_mask_filtered > 125] = [0, 0, 0]
-        ini_shadowfree = (np.clip(ini_shadowfree, 0, 1) * 255).astype(np.uint8)
+        ini_shadowfree = (ini_shadowfree * 255).astype(np.uint8)
+
+
         ini_shadowfree_pil = Image.fromarray(ini_shadowfree)
 
         # Process real shadow image

@@ -122,7 +122,7 @@ To test the GSR model and evaluate its performance, run:
 ```bash
 python test_GSR.py     --dataroot ./datasets/test_RS_SynShadow     --name AISD_GSRNet     --model test_GSR
 ```
-The results will be saved in the ./results directory.<hr></hr>
+The results will be saved in the ./results directory. If you want to reproduce the AISD test results in the paper, it is recommended that you resize all images to 512*512 (--preprocess resize --load_size 512). <hr></hr>
 Pretrained model for GSRNet can be downloaded from [model link placeholder] and placed in:
 
 ```

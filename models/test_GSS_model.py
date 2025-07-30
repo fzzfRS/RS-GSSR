@@ -80,13 +80,16 @@ class TestGSSModel(BaseModel):
         """Run forward pass."""
         self.fake = self.netG_A(self.real)  # G_A(A)
 
-        # 将 matte_tensor 转换为 0~1 之间的掩码
+        # Transfer matte_tensor to range [0, 1]
         self.real_matte_mask = (
             self.mask + 1
         ) / 2  # Assuming real_matte is in the range [0, 1]
         self.shadow = self.fake * self.real_matte_mask + self.shadowfree * (
             1 - self.real_matte_mask
         )
+        # Limit tensor to range [-1, 1]
+
+        self.shadow = torch.clamp(self.shadow, min=-1.0, max=1.0)
 
     def optimize_parameters(self):
         """No optimization for test model."""

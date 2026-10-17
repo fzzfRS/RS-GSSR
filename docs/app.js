@@ -182,20 +182,22 @@
     const labels = {Shadow: 'Input shadow', LCC: 'Chen et al.', Silva: 'Silva et al.', Ours: 'GSR-Net (Ours)'};
     for (const dataset of ['aisd', 'asd']) {
       const target = $(`#${dataset}-comparison-rows`);
-      for (const id of results.comparisons[dataset]) {
+      for (const [index, id] of results.comparisons[dataset].entries()) {
         const item = data[dataset].find(scene => scene.id === id);
         if (!item) continue;
         const row = create('div', 'method-comparison-row');
-        row.append(create('p', 'comparison-scene-id', id));
         const grid = create('div', 'paper-comparison-grid');
         for (const method of methods) {
-          const cell = imageCell(item.methods[method], method === 'Ours' ? 'Ours' : labels[method] || method, id);
-          if (method === 'Ours') $('figcaption', cell).textContent = labels.Ours;
+          const cell = imageCell(item.methods[method], method === 'Ours' ? 'Ours' : labels[method] || method, `${dataset.toUpperCase()} example ${index + 1}`);
+          $('figcaption', cell).remove();
           grid.append(cell);
         }
         row.append(grid);
         target.append(row);
       }
+      const methodLabels = create('div', 'paper-comparison-grid method-comparison-labels');
+      for (const method of methods) methodLabels.append(create('span', `comparison-method-label${method === 'Ours' ? ' ours-label' : ''}`, labels[method] || method));
+      target.append(methodLabels);
     }
   }
 

@@ -14,7 +14,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="publication-header.css">
-  <link rel="stylesheet" href="project-content.css">
+  <link rel="stylesheet" href="project-content.css?v=20261017-aligned">
   <script src="data.js" defer></script>
   <script src="app.js?v=20261017-framework" defer></script>
 </head>
@@ -39,7 +39,7 @@
 
   <section id="abstract" class="section muted-section"><div class="reading-width">
     <h2>Abstract</h2>
-    <p>Shadow removal in remote sensing imagery is challenged by the limited availability of paired shadow and shadow-free training images, as well as the difficulty of recovering appearance across shadow boundaries. This work combines illumination modeling with generative learning in a framework for shadow synthesis and removal. The generative shadow synthesis network (GSS-Net) integrates a shadow illumination attenuation model with learned style correction to create paired training samples, forming the RS-SynShadow dataset. The generative shadow removal network (GSR-Net) incorporates histogram-enhanced illumination and combines color and structure information to reconstruct shadow-free imagery. Visual results on synthetic and real remote sensing images illustrate the synthesis and removal stages of the framework.</p>
+    <p>Shadow removal in remote sensing imagery is challenged by the limited availability of <strong>paired shadow and shadow-free training images</strong>, as well as the difficulty of recovering appearance across shadow boundaries. This work combines <strong>illumination modeling with generative learning</strong> in a framework for shadow synthesis and removal. The generative shadow synthesis network (<strong>GSS-Net</strong>) integrates a <strong>shadow illumination attenuation model</strong> with learned style correction to create paired training samples, forming the <strong>RS-SynShadow</strong> dataset. The generative shadow removal network (<strong>GSR-Net</strong>) incorporates <strong>histogram-enhanced illumination</strong> and combines color and structure information to reconstruct shadow-free imagery. Visual results on synthetic and real remote sensing images illustrate the synthesis and removal stages of the framework.</p>
     <p class="abstract-note">Project overview adapted from the paper. <a href="https://doi.org/10.1109/TGRS.2025.3561307" target="_blank" rel="noopener">Read the published article ↗</a></p>
   </div></section>
 
@@ -47,12 +47,12 @@
     <article id="gss-net" class="network-method">
       <div class="section-heading"><h2>Generative Shadow Synthesis Network (GSS-Net)</h2></div>
       <figure class="paper-figure"><button class="figure-zoom" data-figure="synthesis" aria-label="Enlarge GSS-Net architecture"><img src="assets/figures/synthesis.webp" width="1963" height="662" loading="lazy" alt="GSS-Net architecture: shadow-free background construction, shadow illumination attenuation, style correction, and local discriminator."></button></figure>
-      <p class="method-description">GSS-Net combines a shadow illumination attenuation (SIA) model with a style correction generator. The illumination model produces initial synthetic shadows, and the generator refines their appearance using real shadow imagery with a local discriminator. Together with the corresponding shadow-free backgrounds, these synthesized images form the paired RS-SynShadow dataset for training the shadow removal network.</p>
+      <p class="method-description">GSS-Net combines a <strong>shadow illumination attenuation (SIA) model</strong> with a <strong>style correction generator</strong>. The illumination model produces initial synthetic shadows, and the generator refines their appearance using real shadow imagery with a local discriminator. Together with the corresponding shadow-free backgrounds, these synthesized images form the <strong>paired RS-SynShadow dataset</strong> for training the shadow removal network.</p>
     </article>
     <article id="gsr-net" class="network-method">
       <div class="section-heading"><h2>Generative Shadow Removal Network (GSR-Net)</h2></div>
       <figure class="paper-figure"><button class="figure-zoom" data-figure="removal" aria-label="Enlarge GSR-Net architecture"><img src="assets/figures/removal.webp" width="1916" height="838" loading="lazy" alt="GSR-Net architecture with umbra and penumbra processing, histogram-enhanced illumination, color and structure encoders, and cascaded decoder."></button></figure>
-      <p class="method-description">GSR-Net incorporates a histogram-enhanced illumination (HEI) model to obtain a detail-enhanced image from the shadow input. Color and structure encoders extract complementary features, which are combined through adaptive feature fusion and cross-attention fusion. A cascaded decoder reconstructs the shadow-free image, with umbra and penumbra processing providing shadow-region information.</p>
+      <p class="method-description">GSR-Net incorporates a <strong>histogram-enhanced illumination (HEI) model</strong> to obtain a detail-enhanced image from the shadow input. <strong>Color and structure encoders</strong> extract complementary features, which are combined through <strong>adaptive feature fusion and cross-attention fusion</strong>. A <strong>cascaded decoder</strong> reconstructs the shadow-free image, with umbra and penumbra processing providing shadow-region information.</p>
     </article>
   </section>
 

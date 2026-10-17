@@ -11,9 +11,11 @@
   };
   const pretty = name => name === 'Shadow' ? 'Input' : name;
 
-  function comparison(input, output, name, eager = false) {
+  function comparison(input, output, name, eager = false, labels = {}) {
+    const beforeLabel = labels.before || 'Input';
+    const afterLabel = labels.after || 'Ours';
     const box = create('div', 'compare');
-    for (const [source, className, description] of [[output, 'compare-output', 'Shadow removal result'], [input, 'compare-input', 'Input shadow image']]) {
+    for (const [source, className, description] of [[output, 'compare-output', labels.afterDescription || 'Shadow removal result'], [input, 'compare-input', labels.beforeDescription || 'Input shadow image']]) {
       const img = create('img', className);
       img.src = source;
       img.alt = `${description}: ${name}`;
@@ -23,17 +25,17 @@
       img.height = 512;
       box.append(img);
     }
-    box.append(create('span', 'compare-label', 'Input'), create('span', 'compare-label after', 'Ours'), create('span', 'compare-handle', '↔'));
+    box.append(create('span', 'compare-label', beforeLabel), create('span', 'compare-label after', afterLabel), create('span', 'compare-handle', '↔'));
     const slider = create('input');
     slider.type = 'range';
     slider.min = '0';
     slider.max = '100';
     slider.value = '50';
     slider.setAttribute('aria-label', `Before and after comparison for ${name}`);
-    slider.setAttribute('aria-valuetext', '50% input, 50% result');
+    slider.setAttribute('aria-valuetext', `50% ${beforeLabel}, 50% ${afterLabel}`);
     slider.addEventListener('input', () => {
       box.style.setProperty('--split', `${slider.value}%`);
-      slider.setAttribute('aria-valuetext', `${slider.value}% input, ${100 - Number(slider.value)}% result`);
+      slider.setAttribute('aria-valuetext', `${slider.value}% ${beforeLabel}, ${100 - Number(slider.value)}% ${afterLabel}`);
     });
     box.append(slider);
     return box;
@@ -91,8 +93,27 @@
     }
   }
 
+  function synthesisGallery() {
+    const target = $('#synthesis-results');
+    if (!target) return;
+    for (const [index, item] of (window.SYNTHESIS_EXAMPLES || []).entries()) {
+      const figure = create('figure', 'synthesis-example');
+      figure.append(comparison(item.input, item.output, `shadow synthesis example ${index + 1}, ${item.scene}`, false, {
+        before: 'Shadow-free',
+        after: 'Synthetic shadow',
+        beforeDescription: 'Shadow-free source image; white regions are invalid NoData areas',
+        afterDescription: 'GSS-Net synthetic shadow image; white regions are invalid NoData areas'
+      }));
+      const caption = create('figcaption');
+      caption.append(create('span', 'synthesis-scene', `${String(index + 1).padStart(2, '0')} · ${item.scene}`), create('span', 'synthesis-invalid-label', 'White = invalid (NoData)'));
+      figure.append(caption);
+      target.append(figure);
+    }
+  }
+
   if (document.body.classList.contains('project-page')) {
-    imageRows($('#synthesis-results'), data.synthesis);
+    synthesisGallery();
+    imageRows($('#synthesis-baselines'), data.synthesis);
     imageRows($('#synthetic-removal-results'), data.syntheticRemoval);
     for (const dataset of ['aisd', 'asd']) buildDataset(dataset);
 

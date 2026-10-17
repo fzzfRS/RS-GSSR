@@ -122,6 +122,63 @@ h2 {
   font-size: 14px !important;
 }
 
+.invalid-region-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  max-width: 1000px;
+  margin: 0 auto 30px;
+  padding: 15px 20px;
+  border: 1px solid #d7e0e7;
+  border-radius: 6px;
+  background: #fff;
+  color: #52616d;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.invalid-swatch {
+  flex: 0 0 22px;
+  height: 22px;
+  border: 1px solid #98a5af;
+  background: #fff;
+}
+
+.synthesis-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px 20px;
+}
+
+.synthesis-example {
+  min-width: 0;
+}
+
+.synthesis-example figcaption {
+  margin-top: 9px;
+  line-height: 1.6;
+}
+
+.synthesis-scene {
+  display: block;
+  color: #44545f;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.synthesis-invalid-label {
+  display: block;
+  color: #77828b;
+  font-size: 13px;
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .synthesis-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 640px) {
   h2 {
     font-size: 27px;
@@ -168,5 +225,20 @@ h2 {
   .downloads h3,
   .gallery-callout h3 {
     font-size: 21px;
+  }
+
+  .synthesis-gallery {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .invalid-region-note {
+    padding: 13px 14px;
+    align-items: flex-start;
+    font-size: 16px;
+  }
+
+  .invalid-swatch {
+    margin-top: 3px;
   }
 }

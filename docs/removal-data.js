@@ -1,10 +1,10 @@
 // Quantitative values transcribed from Table II of the published paper (p. 11).
 window.REMOVAL_RESULTS = {
   showcase: [
-    ['austin13_sub2', 'Residential buildings'],
+    ['austin7_sub2', 'Large roof complex'],
     ['austin28_sub9', 'Parking and roads'],
     ['chicago28_sub10', 'Park and vegetation'],
-    ['chicago34_sub8', 'Dense urban blocks'],
+    ['chicago16_sub5', 'Buildings and greenery'],
     ['innsbruck27_sub4', 'Courtyard and streets'],
     ['tyrol-e6_sub3', 'Roof and grassland'],
     ['vienna12_sub2', 'Large building shadows'],

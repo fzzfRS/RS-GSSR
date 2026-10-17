@@ -14,10 +14,11 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="publication-header.css">
-  <link rel="stylesheet" href="project-content.css?v=20261017-synthesis-grid">
+  <link rel="stylesheet" href="project-content.css?v=20261017-removal">
   <script src="data.js" defer></script>
   <script src="synthesis-data.js" defer></script>
-  <script src="app.js?v=20261017-synthesis-grid" defer></script>
+  <script src="removal-data.js" defer></script>
+  <script src="app.js?v=20261017-removal" defer></script>
 </head>
 <body class="project-page">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -64,9 +65,20 @@
   </div></section>
 
   <section id="results" class="section container">
-    <div class="section-heading"><span class="eyebrow">SHADOW REMOVAL</span><h2>Results on real remote sensing images</h2><p>Compare methods on the same scene. Inspect shadow boundaries, ground texture, and color consistency.</p></div>
-    <div class="dataset-tabs" role="tablist" aria-label="Result dataset"><button id="tab-aisd" class="dataset-tab active" role="tab" aria-selected="true" aria-controls="panel-aisd" data-dataset="aisd">AISD <span>6 scenes</span></button><button id="tab-asd" class="dataset-tab" role="tab" aria-selected="false" aria-controls="panel-asd" tabindex="-1" data-dataset="asd">ASD <span>4 scenes</span></button></div>
-    <div id="panel-aisd" role="tabpanel" aria-labelledby="tab-aisd" class="dataset-panel"></div><div id="panel-asd" role="tabpanel" aria-labelledby="tab-asd" class="dataset-panel" hidden></div>
+    <div class="section-heading"><span class="eyebrow">SHADOW REMOVAL</span><h2>Results on real remote sensing images</h2><p>Drag the dividers to explore shadow removal by <strong>GSR-Net</strong> on representative AISD scenes.</p></div>
+    <div id="removal-showcase" class="removal-gallery" aria-label="AISD shadow removal before and after comparisons"></div>
+    <div id="quantitative-results" class="results-block">
+      <h3>Quantitative comparison</h3>
+      <p class="results-intro">Table II from the paper. Full-reference evaluation on RS-SynShadow and no-reference evaluation on AISD and ASD.</p>
+      <div class="table-scroll" role="region" aria-label="Quantitative comparison on three datasets" tabindex="0"><table id="quantitative-table" class="quantitative-table"><caption>Quantitative comparisons on RS-SynShadow, AISD, and ASD</caption><thead><tr><th scope="col" rowspan="2">Method</th><th scope="colgroup" colspan="2">RS-SynShadow</th><th scope="colgroup" colspan="3">AISD</th><th scope="colgroup" colspan="3">ASD</th></tr><tr><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">Entropy ↑</th><th scope="col">BRISQUE ↓</th><th scope="col">PIQE ↓</th><th scope="col">Entropy ↑</th><th scope="col">BRISQUE ↓</th><th scope="col">PIQE ↓</th></tr></thead><tbody></tbody></table></div>
+      <p class="table-note">↑ Higher is better; ↓ lower is better. PSNR and SSIM are reported as mean (± standard deviation). <strong>Bold</strong> and <span class="second-score">underlined</span> values mark the best and second-best means, respectively. † Natural-image methods; ‡ remote sensing methods. <a href="https://doi.org/10.1109/TGRS.2025.3561307" target="_blank" rel="noopener">Source: Table II, published paper ↗</a></p>
+    </div>
+    <div class="results-block qualitative-results">
+      <h3>Visual comparison with other methods</h3>
+      <p class="results-intro">Two representative scenes from each dataset. Click any image to enlarge it.</p>
+      <section class="comparison-dataset" aria-labelledby="aisd-comparison-heading"><h4 id="aisd-comparison-heading">AISD</h4><div id="aisd-comparison-rows" class="method-comparison-scroll" role="region" aria-label="Two AISD scenes compared across methods" tabindex="0"></div></section>
+      <section class="comparison-dataset" aria-labelledby="asd-comparison-heading"><h4 id="asd-comparison-heading">ASD</h4><div id="asd-comparison-rows" class="method-comparison-scroll" role="region" aria-label="Two ASD scenes compared across methods" tabindex="0"></div></section>
+    </div>
     <div class="gallery-callout"><div><h3>Every AISD test result, in one place.</h3><p>Browse 51 paired inputs and outputs with interactive before / after comparisons.</p></div><a class="button primary" href="gallery.html">View full gallery <span aria-hidden="true">→</span></a></div>
   </section>
 

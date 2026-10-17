@@ -113,28 +113,7 @@
 
   if (document.body.classList.contains('project-page')) {
     synthesisGallery();
-    for (const dataset of ['aisd', 'asd']) buildDataset(dataset);
-
-    const tabs = [...document.querySelectorAll('[data-dataset]')];
-    function activateTab(tab) {
-      tabs.forEach(button => {
-        const active = button === tab;
-        button.classList.toggle('active', active);
-        button.setAttribute('aria-selected', String(active));
-        button.tabIndex = active ? 0 : -1;
-        $(`#panel-${button.dataset.dataset}`).hidden = !active;
-      });
-    }
-    tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => activateTab(tab));
-      tab.addEventListener('keydown', event => {
-        let target;
-        if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') target = tabs[(index + 1) % tabs.length];
-        if (event.key === 'Home') target = tabs[0];
-        if (event.key === 'End') target = tabs[tabs.length - 1];
-        if (target) { event.preventDefault(); activateTab(target); target.focus(); }
-      });
-    });
+    removalResults();
 
     $('#copy-citation').addEventListener('click', async () => {
       const text = $('#bibtex').textContent;
@@ -157,6 +136,67 @@
         $('#copy-status').textContent = 'Select the BibTeX text above to copy it manually.';
       }
     });
+  }
+
+  function removalResults() {
+    const results = window.REMOVAL_RESULTS;
+    if (!results) return;
+    const gallery = $('#removal-showcase');
+    for (const [id, description] of results.showcase) {
+      const item = data.gallery.find(scene => scene.id === id);
+      if (!item) continue;
+      const figure = create('figure', 'removal-example');
+      figure.append(comparison(item.input, item.output, `AISD ${id}`, false, {
+        before: 'Input shadow', after: 'GSR-Net',
+        beforeDescription: 'Original AISD shadow image',
+        afterDescription: 'GSR-Net shadow removal result'
+      }));
+      const caption = create('figcaption');
+      caption.append(create('span', 'removal-scene-description', description), create('span', 'removal-scene-id', id));
+      figure.append(caption);
+      gallery.append(figure);
+    }
+
+    const rows = results.quantitative;
+    const higherIsBetter = [true, true, true, false, false, true, false, false];
+    const ranked = higherIsBetter.map((higher, col) => [...new Set(rows.map(row => Number(row.values[col])))].sort((a, b) => higher ? b - a : a - b));
+    const body = $('#quantitative-table tbody');
+    for (const item of rows) {
+      const row = create('tr', item.method === 'GSR-Net (Ours)' ? 'ours-row' : '');
+      const heading = create('th', '', item.method);
+      heading.scope = 'row';
+      if (item.domain) heading.append(create('sup', '', item.domain));
+      row.append(heading);
+      item.values.forEach((value, col) => {
+        const cell = create('td');
+        const rank = ranked[col].indexOf(Number(value));
+        cell.append(create(rank === 0 ? 'strong' : 'span', rank === 1 ? 'second-score' : '', value));
+        if (col < 2) cell.append(create('span', 'score-std', ` (±${item.std[col]})`));
+        row.append(cell);
+      });
+      body.append(row);
+    }
+
+    // Match the method order used in the paper's visual comparisons (Figs. 8–9).
+    const methods = ['Shadow', 'LCC', 'Silva', 'TBRNet', 'ShadowFormer', 'FusionNet', 'SRNet', 'Ours'];
+    const labels = {Shadow: 'Input shadow', LCC: 'Chen et al.', Silva: 'Silva et al.', Ours: 'GSR-Net (Ours)'};
+    for (const dataset of ['aisd', 'asd']) {
+      const target = $(`#${dataset}-comparison-rows`);
+      for (const id of results.comparisons[dataset]) {
+        const item = data[dataset].find(scene => scene.id === id);
+        if (!item) continue;
+        const row = create('div', 'method-comparison-row');
+        row.append(create('p', 'comparison-scene-id', id));
+        const grid = create('div', 'paper-comparison-grid');
+        for (const method of methods) {
+          const cell = imageCell(item.methods[method], method === 'Ours' ? 'Ours' : labels[method] || method, id);
+          if (method === 'Ours') $('figcaption', cell).textContent = labels.Ours;
+          grid.append(cell);
+        }
+        row.append(grid);
+        target.append(row);
+      }
+    }
   }
 
   function buildDataset(dataset) {

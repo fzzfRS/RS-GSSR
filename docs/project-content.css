@@ -158,6 +158,47 @@ h2 {
   }
 }
 
+.removal-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 26px 18px;
+}
+
+.removal-example { min-width: 0; }
+.removal-example figcaption { margin-top: 9px; line-height: 1.5; }
+.removal-scene-description { display: block; font-size: 15px; color: #44545f; }
+.removal-scene-id { display: block; font-size: 12px; color: #77828b; }
+.results-block { margin-top: 64px; }
+.results-block > h3 { font-size: 27px; margin-bottom: 12px; text-align: center; }
+.results-intro { font-size: 17px; line-height: 1.75; color: var(--subtle); text-align: center; margin-bottom: 26px; }
+.table-scroll, .method-comparison-scroll { overflow-x: auto; scrollbar-width: thin; }
+.quantitative-table { width: 100%; min-width: 1000px; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; text-align: center; border-top: 2px solid #52616d; border-bottom: 2px solid #52616d; }
+.quantitative-table caption { font-size: 15px; color: var(--subtle); margin-bottom: 16px; }
+.quantitative-table th, .quantitative-table td { padding: 11px 8px; white-space: nowrap; }
+.quantitative-table thead { background: #f6f8fa; }
+.quantitative-table thead tr:last-child, .quantitative-table th[rowspan] { border-bottom: 1px solid #bac5ce; }
+.quantitative-table thead tr:first-child th[colspan] { border-bottom: 1px solid #dce3e9; }
+.quantitative-table tbody th { text-align: left; font-weight: 500; }
+.quantitative-table sup { font-size: 10px; margin-left: 3px; }
+.quantitative-table tbody tr + tr { border-top: 1px solid #eef1f4; }
+.quantitative-table .ours-row { background: #eef5fa; border-top: 1px solid #a5bdce; }
+.quantitative-table .ours-row th { color: var(--blue-dark); font-weight: 700; }
+.score-std { color: #65717b; font-size: 12px; }
+.second-score { text-decoration: underline; text-underline-offset: 3px; }
+.table-note { font-size: 12px; color: #77828b; line-height: 1.8; margin: 15px 0 0; }
+.comparison-dataset { margin-top: 34px; }
+.comparison-dataset h4 { font-size: 22px; margin: 0 0 18px; color: var(--blue-dark); }
+.method-comparison-row { min-width: 1000px; margin-bottom: 26px; }
+.method-comparison-row:last-child { margin-bottom: 5px; }
+.comparison-scene-id { font-size: 12px; color: #77828b; margin-bottom: 10px; }
+.paper-comparison-grid { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 12px; }
+.paper-comparison-grid .result-cell figcaption { font-size: 12px; margin-top: 8px; white-space: nowrap; }
+.paper-comparison-grid .ours .image-button { outline: 2px solid #a5c4d9; outline-offset: 2px; }
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .removal-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 640px) {
   h2 {
     font-size: 27px;
@@ -214,4 +255,11 @@ h2 {
   .invalid-region-note {
     font-size: 13px;
   }
+
+  .removal-gallery { grid-template-columns: 1fr; gap: 24px; }
+  .results-block { margin-top: 44px; }
+  .results-block > h3 { font-size: 24px; }
+  .results-intro { font-size: 16px; text-align: left; }
+  .quantitative-table { font-size: 13px; }
+  .table-note { font-size: 12px; }
 }

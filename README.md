@@ -6,6 +6,8 @@ This is the official PyTorch implementation of the paper:
 **C. Shao, H. Li and H. Shen, "Generative Shadow Synthesis and Removal for Remote Sensing Images Through Embedding Illumination Models," in IEEE Transactions on Geoscience and Remote Sensing, vol. 63, pp. 1-15, 2025, Art no. 5620115, doi: **[**10.1109/TGRS.2025.3561307**](https://doi.org/10.1109/TGRS.2025.3561307)**.**
 [PaperLink](https://ieeexplore.ieee.org/document/10967107)
 
+**[Project Page](https://fzzfrs.github.io/RS-GSSR/)** · **[Full AISD Results](https://fzzfrs.github.io/RS-GSSR/gallery.html)**
+
 We also provide the pretrained models and datasets for both shadow synthesis (GSSNet) and shadow removal (GSRNet) tasks.
 
 - **AISD Dataset**: [Baidu Wangpan Link](https://pan.baidu.com/s/19AtO2Y7r5wDZs0PQgA5eug) (password: mhxt)

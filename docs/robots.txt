@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fzzfrs.github.io/RS-GSSR/sitemap.xml

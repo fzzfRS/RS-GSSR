@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="RS-GSSR: Generative Shadow Synthesis and Removal for Remote Sensing Images Through Embedding Illumination Models. IEEE TGRS 2025. Explore interactive comparisons and all 51 AISD test results.">
+  <meta property="og:title" content="RS-GSSR · Shadow Synthesis and Removal">
+  <meta property="og:description" content="Illumination modeling meets generative learning for remote sensing imagery. IEEE TGRS 2025.">
+  <meta property="og:image" content="https://fzzfrs.github.io/RS-GSSR/assets/social-preview.jpg">
+  <meta property="og:url" content="https://fzzfrs.github.io/RS-GSSR/">
+  <link rel="canonical" href="https://fzzfrs.github.io/RS-GSSR/">
+  <meta name="theme-color" content="#ffffff">
+  <title>RS-GSSR | Remote Sensing Shadow Synthesis & Removal</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header"><nav class="nav-wrap" aria-label="Main navigation">
+  <a class="wordmark" href="index.html"><span class="brand-symbol" aria-hidden="true"></span>RS-GSSR</a>
+  <div class="nav-links"><a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#synthesis">Synthesis</a><a href="#results">Results</a><a href="gallery.html">Full gallery <span aria-hidden="true">↗</span></a></div>
+</nav></header>
+<main id="main">
+  <section class="hero container">
+    <div class="venue">IEEE TRANSACTIONS ON GEOSCIENCE AND REMOTE SENSING · 2025</div>
+    <h1>Generative Shadow Synthesis and Removal<br class="desktop-break"> for Remote Sensing Images<br class="desktop-break"> <span>Through Embedding Illumination Models</span></h1>
+    <p class="authors"><span>Chenglin Shao</span><a href="https://jszy.whu.edu.cn/lihuifang1/en/index/428344/list/index.htm" target="_blank" rel="noopener">Huifang Li</a><a href="https://jszy.whu.edu.cn/shenhuanfeng/zh_CN/index/249089/list/index.htm" target="_blank" rel="noopener">Huanfeng Shen</a></p>
+    <p class="affiliation">School of Resource and Environmental Sciences, Wuhan University</p>
+    <div class="resource-buttons">
+      <a class="button primary" href="https://doi.org/10.1109/TGRS.2025.3561307" target="_blank" rel="noopener"><span aria-hidden="true">▤</span> Paper</a>
+      <a class="button" href="https://github.com/fzzfRS/RS-GSSR" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5 1 12l7 7m8-14 7 7-7 7M14 3l-4 18"/></svg> Code</a>
+      <a class="button" href="#resources"><span aria-hidden="true">▦</span> Datasets</a>
+      <a class="button" href="https://pan.baidu.com/s/1l7E_-O6QMoDE_fk4E7_O1A?pwd=evpn" target="_blank" rel="noopener"><span aria-hidden="true">↓</span> Models</a>
+    </div>
+    <div class="hero-showcase" id="hero-showcase" aria-label="Interactive shadow removal examples"></div>
+    <p class="figure-caption"><span class="drag-icon" aria-hidden="true">↔</span> Drag the divider to compare the shadow image with our result. <a href="gallery.html">Explore all 51 AISD results →</a></p>
+    <p class="hero-summary">Synthesizing shadows to learn how to remove them.<br><span>A framework connecting illumination models, paired data generation, and remote sensing shadow removal.</span></p>
+  </section>
+
+  <section id="abstract" class="section muted-section"><div class="reading-width">
+    <h2>Abstract</h2>
+    <p>Shadow removal in remote sensing imagery is challenged by the limited availability of paired shadow and shadow-free training images, as well as the difficulty of recovering appearance across shadow boundaries. This work combines illumination modeling with generative learning in a framework for shadow synthesis and removal. The generative shadow synthesis network (GSS-Net) integrates a shadow illumination attenuation model with learned style correction to create paired training samples, forming the RS-SynShadow dataset. The generative shadow removal network (GSR-Net) incorporates histogram-enhanced illumination and combines color and structure information to reconstruct shadow-free imagery. Visual results on synthetic and real remote sensing images illustrate the synthesis and removal stages of the framework.</p>
+    <p class="abstract-note">Project overview adapted from the paper. <a href="https://doi.org/10.1109/TGRS.2025.3561307" target="_blank" rel="noopener">Read the published article ↗</a></p>
+  </div></section>
+
+  <section id="method" class="section container">
+    <div class="section-heading"><span class="eyebrow">THE FRAMEWORK</span><h2>From shadow synthesis to shadow removal</h2><p>Two networks, connected through illumination modeling and paired training data.</p></div>
+    <figure class="paper-figure"><button class="figure-zoom" data-figure="overview" aria-label="Enlarge framework overview"><img src="assets/figures/overview.webp" width="1460" height="660" alt="Overview of GSS-Net shadow synthesis, RS-SynShadow dataset construction, and GSR-Net shadow removal, with visual comparisons." loading="lazy"></button><figcaption>GSS-Net generates paired shadow / shadow-free samples. GSR-Net learns shadow removal using the resulting RS-SynShadow dataset.</figcaption></figure>
+    <div class="method-notes"><div><h3><span>01</span> GSS-Net · Shadow synthesis</h3><p>Shadow illumination attenuation provides an initial shadow image. A style correction generator refines its appearance using real shadow imagery.</p></div><div><h3><span>02</span> GSR-Net · Shadow removal</h3><p>Histogram-enhanced illumination guides a network with color and structure encoders, feature fusion, and a cascaded decoder.</p></div></div>
+    <details class="architecture"><summary>Explore the network architectures <span aria-hidden="true">+</span></summary><div class="architecture-content"><h3>Generative Shadow Synthesis Network</h3><button class="figure-zoom" data-figure="synthesis" aria-label="Enlarge GSS-Net architecture"><img src="assets/figures/synthesis.webp" width="1963" height="662" loading="lazy" alt="GSS-Net architecture: shadow-free background construction, shadow illumination attenuation, style correction, and local discriminator."></button><h3>Generative Shadow Removal Network</h3><button class="figure-zoom" data-figure="removal" aria-label="Enlarge GSR-Net architecture"><img src="assets/figures/removal.webp" width="1916" height="838" loading="lazy" alt="GSR-Net architecture with umbra and penumbra processing, histogram-enhanced illumination, color and structure encoders, and cascaded decoder."></button></div></details>
+  </section>
+
+  <section id="synthesis" class="section muted-section"><div class="container">
+    <div class="section-heading"><span class="eyebrow">SHADOW SYNTHESIS</span><h2>Building paired training data</h2><p>Visual comparison of shadow synthesis with LCC, CycleGAN, and our GSS-Net.</p></div>
+    <div id="synthesis-results"></div>
+    <p class="figure-caption">Input denotes the source image supplied with the synthesis comparisons. Click any image to inspect it at a larger size.</p>
+    <details class="architecture synthetic-extra"><summary>Shadow removal with different training data <span aria-hidden="true">+</span></summary><div class="architecture-content"><p class="subtle">Additional paper comparisons, using the training-data labels supplied with the original results.</p><div id="synthetic-removal-results"></div></div></details>
+  </div></section>
+
+  <section id="results" class="section container">
+    <div class="section-heading"><span class="eyebrow">SHADOW REMOVAL</span><h2>Results on real remote sensing images</h2><p>Compare methods on the same scene. Inspect shadow boundaries, ground texture, and color consistency.</p></div>
+    <div class="dataset-tabs" role="tablist" aria-label="Result dataset"><button id="tab-aisd" class="dataset-tab active" role="tab" aria-selected="true" aria-controls="panel-aisd" data-dataset="aisd">AISD <span>6 scenes</span></button><button id="tab-asd" class="dataset-tab" role="tab" aria-selected="false" aria-controls="panel-asd" tabindex="-1" data-dataset="asd">ASD <span>4 scenes</span></button></div>
+    <div id="panel-aisd" role="tabpanel" aria-labelledby="tab-aisd" class="dataset-panel"></div><div id="panel-asd" role="tabpanel" aria-labelledby="tab-asd" class="dataset-panel" hidden></div>
+    <div class="gallery-callout"><div><h3>Every AISD test result, in one place.</h3><p>Browse 51 paired inputs and outputs with interactive before / after comparisons.</p></div><a class="button primary" href="gallery.html">View full gallery <span aria-hidden="true">→</span></a></div>
+  </section>
+
+  <section id="resources" class="section muted-section"><div class="container">
+    <div class="section-heading"><span class="eyebrow">REPRODUCE & EXPLORE</span><h2>Datasets and pretrained models</h2><p>Download the data and weights. Training and inference instructions are available on GitHub.</p></div>
+    <div class="downloads"><article><span class="download-type">REAL IMAGERY</span><h3>AISD</h3><p>Remote sensing shadow images and their corresponding shadow masks.</p><div class="download-bottom"><a href="https://pan.baidu.com/s/19AtO2Y7r5wDZs0PQgA5eug" target="_blank" rel="noopener">Download dataset ↗</a><span>Code: <strong>mhxt</strong></span></div></article><article><span class="download-type">SYNTHETIC PAIRS</span><h3>RS-SynShadow</h3><p>Synthetic shadow images, shadow masks, and paired shadow-free images.</p><div class="download-bottom"><a href="https://pan.baidu.com/s/1iKLqdXszWA9wjqGS_S7h7A?pwd=n4vd" target="_blank" rel="noopener">Download dataset ↗</a><span>Code: <strong>n4vd</strong></span></div></article><article><span class="download-type">MODEL WEIGHTS</span><h3>GSS-Net & GSR-Net</h3><p>Pretrained models for shadow synthesis and shadow removal.</p><div class="download-bottom"><a href="https://pan.baidu.com/s/1l7E_-O6QMoDE_fk4E7_O1A?pwd=evpn" target="_blank" rel="noopener">Download models ↗</a><span>Code: <strong>evpn</strong></span></div></article></div>
+    <p class="figure-caption">Downloads are hosted on Baidu Netdisk. <a href="https://github.com/fzzfRS/RS-GSSR#-environment-and-installation" target="_blank" rel="noopener">Installation and usage instructions ↗</a></p>
+  </div></section>
+
+  <section id="citation" class="section reading-width"><div class="citation-heading"><h2>Citation</h2><button id="copy-citation" class="button small" type="button">Copy BibTeX</button></div><p>If you find this work useful, please cite our paper.</p>
+<pre class="citation"><code id="bibtex">@article{shao2025generative,
+  title={Generative Shadow Synthesis and Removal for Remote Sensing
+         Images Through Embedding Illumination Models},
+  author={Shao, Chenglin and Li, Huifang and Shen, Huanfeng},
+  journal={IEEE Transactions on Geoscience and Remote Sensing},
+  volume={63},
+  pages={1--15},
+  year={2025},
+  doi={10.1109/TGRS.2025.3561307}
+}</code></pre><p id="copy-status" class="copy-status" role="status"></p></section>
+</main>
+<footer class="footer"><a class="wordmark" href="index.html">RS-GSSR</a><p>Chenglin Shao · Huifang Li · Huanfeng Shen<br>Wuhan University · IEEE TGRS 2025</p><p>Page design inspired by <a href="https://hiahia1369.github.io/project/StableShadowRemoval/" target="_blank" rel="noopener">StableShadowRemoval</a> and <a href="https://nerfies.github.io/" target="_blank" rel="noopener">Nerfies</a>.<br><a href="https://github.com/fzzfRS/RS-GSSR/issues" target="_blank" rel="noopener">Questions? Open an issue ↗</a></p></footer>
+<dialog id="image-dialog" aria-label="Enlarged figure"><button class="dialog-close" aria-label="Close enlarged figure">×</button><img alt=""><p></p></dialog>
+</body></html>

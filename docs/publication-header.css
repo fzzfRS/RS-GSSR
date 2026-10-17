@@ -1,0 +1,108 @@
+/* Publication masthead, following the StableShadowRemoval reference. */
+.hero {
+  padding-top: 38px;
+}
+
+.publication-header {
+  width: min(1320px, calc(100vw - 64px));
+  margin-left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.publication-header h1 {
+  margin: 0 0 12px;
+  color: #363636;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  text-wrap: balance;
+}
+
+.publication-header .venue {
+  margin: 0 0 17px;
+  max-width: none;
+  color: #52a5cf;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+.publication-header .authors {
+  display: block;
+  margin: 0;
+  color: #363636;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.publication-header .author {
+  color: #07549a;
+  white-space: nowrap;
+}
+
+.publication-header .author a {
+  color: inherit;
+}
+
+.publication-header sup {
+  color: #363636;
+  font-size: 70%;
+  line-height: 0;
+  vertical-align: super;
+}
+
+.publication-header .affiliation {
+  margin: 2px 0 27px;
+  color: #363636;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .publication-header {
+    width: calc(100vw - 40px);
+  }
+
+  .publication-header h1 {
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-top: 28px;
+  }
+
+  .publication-header {
+    width: 100%;
+    margin-left: 0;
+    transform: none;
+  }
+
+  .publication-header h1 {
+    font-size: 28px;
+    letter-spacing: -0.4px;
+    margin-bottom: 12px;
+  }
+
+  .publication-header .venue {
+    font-size: 23px;
+    margin-bottom: 14px;
+  }
+
+  .publication-header .authors {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .publication-header .affiliation {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 3px 0 23px;
+  }
+}

@@ -96,7 +96,7 @@
   function synthesisGallery() {
     const target = $('#synthesis-results');
     if (!target) return;
-    for (const [index, item] of (window.SYNTHESIS_EXAMPLES || []).entries()) {
+    for (const [index, item] of (window.SYNTHESIS_EXAMPLES || []).slice(0, 8).entries()) {
       const figure = create('figure', 'synthesis-example');
       figure.append(comparison(item.input, item.output, `shadow synthesis example ${index + 1}, ${item.scene}`, false, {
         before: 'Shadow-free',
@@ -105,7 +105,7 @@
         afterDescription: 'GSS-Net synthetic shadow image; white regions are invalid NoData areas'
       }));
       const caption = create('figcaption');
-      caption.append(create('span', 'synthesis-scene', `${String(index + 1).padStart(2, '0')} · ${item.scene}`), create('span', 'synthesis-invalid-label', 'White = invalid (NoData)'));
+      caption.append(create('span', 'synthesis-scene', `${String(index + 1).padStart(2, '0')} · ${item.scene}`));
       figure.append(caption);
       target.append(figure);
     }
@@ -113,8 +113,6 @@
 
   if (document.body.classList.contains('project-page')) {
     synthesisGallery();
-    imageRows($('#synthesis-baselines'), data.synthesis);
-    imageRows($('#synthetic-removal-results'), data.syntheticRemoval);
     for (const dataset of ['aisd', 'asd']) buildDataset(dataset);
 
     const tabs = [...document.querySelectorAll('[data-dataset]')];

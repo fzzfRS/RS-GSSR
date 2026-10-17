@@ -14,10 +14,10 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="publication-header.css">
-  <link rel="stylesheet" href="project-content.css?v=20261017-synthesis">
+  <link rel="stylesheet" href="project-content.css?v=20261017-synthesis-grid">
   <script src="data.js" defer></script>
   <script src="synthesis-data.js" defer></script>
-  <script src="app.js?v=20261017-synthesis" defer></script>
+  <script src="app.js?v=20261017-synthesis-grid" defer></script>
 </head>
 <body class="project-page">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -59,11 +59,8 @@
 
   <section id="synthesis" class="section muted-section"><div class="container">
     <div class="section-heading"><span class="eyebrow">SHADOW SYNTHESIS</span><h2>Shadow synthesis results</h2><p>Drag each divider to compare the shadow-free source with the shadow synthesized by <strong>GSS-Net</strong>.</p></div>
-    <p class="invalid-region-note"><span class="invalid-swatch" aria-hidden="true"></span><span><strong>White regions are invalid (NoData) areas</strong> and should be ignored when assessing the synthesis results.</span></p>
     <div id="synthesis-results" class="synthesis-gallery" aria-label="Interactive shadow synthesis examples"></div>
-    <p class="figure-caption">Selected paired examples from RS-SynShadow. The white invalid areas are preserved as supplied in the dataset.</p>
-    <details class="architecture"><summary>Comparison with other shadow synthesis methods <span aria-hidden="true">+</span></summary><div id="synthesis-baselines" class="architecture-content"></div></details>
-    <details class="architecture synthetic-extra"><summary>Shadow removal with different training data <span aria-hidden="true">+</span></summary><div class="architecture-content"><p class="subtle">Additional paper comparisons, using the training-data labels supplied with the original results.</p><div id="synthetic-removal-results"></div></div></details>
+    <p class="invalid-region-note"><strong>White regions are invalid (NoData) areas</strong> and should be ignored when assessing the synthesis results.</p>
   </div></section>
 
   <section id="results" class="section container">

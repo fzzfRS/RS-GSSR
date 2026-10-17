@@ -123,32 +123,17 @@ h2 {
 }
 
 .invalid-region-note {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  max-width: 1000px;
-  margin: 0 auto 30px;
-  padding: 15px 20px;
-  border: 1px solid #d7e0e7;
-  border-radius: 6px;
-  background: #fff;
-  color: #52616d;
-  font-size: 17px;
+  margin: 20px auto 0;
+  color: #77828b;
+  font-size: 13px;
   line-height: 1.65;
-}
-
-.invalid-swatch {
-  flex: 0 0 22px;
-  height: 22px;
-  border: 1px solid #98a5af;
-  background: #fff;
+  text-align: center;
 }
 
 .synthesis-gallery {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 30px 20px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px 18px;
 }
 
 .synthesis-example {
@@ -165,12 +150,6 @@ h2 {
   color: #44545f;
   font-size: 15px;
   overflow-wrap: anywhere;
-}
-
-.synthesis-invalid-label {
-  display: block;
-  color: #77828b;
-  font-size: 13px;
 }
 
 @media (min-width: 641px) and (max-width: 900px) {
@@ -233,12 +212,6 @@ h2 {
   }
 
   .invalid-region-note {
-    padding: 13px 14px;
-    align-items: flex-start;
-    font-size: 16px;
-  }
-
-  .invalid-swatch {
-    margin-top: 3px;
+    font-size: 13px;
   }
 }

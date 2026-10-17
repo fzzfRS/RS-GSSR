@@ -1,0 +1,163 @@
+/* Larger reading typography for the academic project page. */
+body {
+  font-size: 18px;
+}
+
+h2 {
+  font-size: 34px;
+  line-height: 1.3;
+}
+
+.reading-width {
+  width: min(1000px, calc(100% - 64px));
+}
+
+.reading-width > p,
+.method-description {
+  font-size: 20px;
+  line-height: 1.85;
+}
+
+.resource-buttons .button {
+  font-size: 16px;
+}
+
+.paper-figure {
+  padding: 0;
+  border: 0;
+}
+
+.framework-figure {
+  margin-top: 8px;
+}
+
+.paper-figure figcaption,
+.figure-caption {
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.paper-figure figcaption {
+  margin-top: 20px;
+}
+
+.section-heading {
+  max-width: 1050px;
+}
+
+.section-heading p {
+  font-size: 19px;
+  line-height: 1.75;
+}
+
+.network-method + .network-method {
+  margin-top: 72px;
+}
+
+.network-method .paper-figure {
+  position: relative;
+  left: 50%;
+  width: min(1320px, calc(100vw - 64px));
+  transform: translateX(-50%);
+}
+
+.method-description {
+  max-width: 1000px;
+  margin: 26px auto 0;
+  color: #4e5c67;
+  text-align: justify;
+}
+
+.result-cell figcaption,
+.comparison-controls label,
+.comparison-controls select,
+.dataset-tab {
+  font-size: 17px;
+}
+
+.dataset-tab span,
+.detail-toggle,
+.detail-help,
+.example-label,
+.subtle {
+  font-size: 15px;
+}
+
+.architecture summary {
+  font-size: 18px;
+}
+
+.downloads h3,
+.gallery-callout h3 {
+  font-size: 23px;
+}
+
+.downloads p,
+.gallery-callout p {
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.download-bottom a,
+.citation-heading + p {
+  font-size: 17px;
+}
+
+.download-bottom span,
+.citation,
+.button.small {
+  font-size: 15px;
+}
+
+.reading-width > .abstract-note {
+  font-size: 14px !important;
+}
+
+@media (max-width: 640px) {
+  h2 {
+    font-size: 27px;
+  }
+
+  .reading-width {
+    width: calc(100% - 32px);
+  }
+
+  .reading-width > p,
+  .method-description {
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: left;
+  }
+
+  .resource-buttons .button {
+    font-size: 14px;
+  }
+
+  .paper-figure figcaption,
+  .figure-caption,
+  .section-heading p {
+    font-size: 16px;
+  }
+
+  .network-method .paper-figure {
+    left: 0;
+    width: 100%;
+    transform: none;
+  }
+
+  .network-method + .network-method {
+    margin-top: 46px;
+  }
+
+  .result-cell figcaption,
+  .comparison-controls label,
+  .comparison-controls select,
+  .detail-help {
+    font-size: 14px;
+  }
+
+  .downloads h3,
+  .gallery-callout h3 {
+    font-size: 21px;
+  }
+}

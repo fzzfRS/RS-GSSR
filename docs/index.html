@@ -14,10 +14,11 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="publication-header.css">
+  <link rel="stylesheet" href="project-content.css">
   <script src="data.js" defer></script>
   <script src="app.js" defer></script>
 </head>
-<body>
+<body class="project-page">
 <a class="skip-link" href="#main">Skip to content</a>
 <main id="main">
   <section class="hero container">
@@ -33,9 +34,7 @@
       <a class="button" href="#resources"><span aria-hidden="true">▦</span> Datasets</a>
       <a class="button" href="https://pan.baidu.com/s/1l7E_-O6QMoDE_fk4E7_O1A?pwd=evpn" target="_blank" rel="noopener"><span aria-hidden="true">↓</span> Models</a>
     </div>
-    <div class="hero-showcase" id="hero-showcase" aria-label="Interactive shadow removal examples"></div>
-    <p class="figure-caption"><span class="drag-icon" aria-hidden="true">↔</span> Drag the divider to compare the shadow image with our result. <a href="gallery.html">Explore all 51 AISD results →</a></p>
-    <p class="hero-summary">Synthesizing shadows to learn how to remove them.<br><span>A framework connecting illumination models, paired data generation, and remote sensing shadow removal.</span></p>
+    <figure class="paper-figure framework-figure"><button class="figure-zoom" data-figure="overview" aria-label="Enlarge framework overview"><img src="assets/figures/overview.webp" width="1460" height="660" alt="Overall framework: GSS-Net shadow synthesis, RS-SynShadow dataset construction, and GSR-Net shadow removal, with visual comparisons." fetchpriority="high"></button><figcaption>Overall framework. GSS-Net synthesizes paired shadow / shadow-free samples to construct RS-SynShadow, which is then used to train GSR-Net for shadow removal.</figcaption></figure>
   </section>
 
   <section id="abstract" class="section muted-section"><div class="reading-width">
@@ -45,10 +44,16 @@
   </div></section>
 
   <section id="method" class="section container">
-    <div class="section-heading"><span class="eyebrow">THE FRAMEWORK</span><h2>From shadow synthesis to shadow removal</h2><p>Two networks, connected through illumination modeling and paired training data.</p></div>
-    <figure class="paper-figure"><button class="figure-zoom" data-figure="overview" aria-label="Enlarge framework overview"><img src="assets/figures/overview.webp" width="1460" height="660" alt="Overview of GSS-Net shadow synthesis, RS-SynShadow dataset construction, and GSR-Net shadow removal, with visual comparisons." loading="lazy"></button><figcaption>GSS-Net generates paired shadow / shadow-free samples. GSR-Net learns shadow removal using the resulting RS-SynShadow dataset.</figcaption></figure>
-    <div class="method-notes"><div><h3><span>01</span> GSS-Net · Shadow synthesis</h3><p>Shadow illumination attenuation provides an initial shadow image. A style correction generator refines its appearance using real shadow imagery.</p></div><div><h3><span>02</span> GSR-Net · Shadow removal</h3><p>Histogram-enhanced illumination guides a network with color and structure encoders, feature fusion, and a cascaded decoder.</p></div></div>
-    <details class="architecture"><summary>Explore the network architectures <span aria-hidden="true">+</span></summary><div class="architecture-content"><h3>Generative Shadow Synthesis Network</h3><button class="figure-zoom" data-figure="synthesis" aria-label="Enlarge GSS-Net architecture"><img src="assets/figures/synthesis.webp" width="1963" height="662" loading="lazy" alt="GSS-Net architecture: shadow-free background construction, shadow illumination attenuation, style correction, and local discriminator."></button><h3>Generative Shadow Removal Network</h3><button class="figure-zoom" data-figure="removal" aria-label="Enlarge GSR-Net architecture"><img src="assets/figures/removal.webp" width="1916" height="838" loading="lazy" alt="GSR-Net architecture with umbra and penumbra processing, histogram-enhanced illumination, color and structure encoders, and cascaded decoder."></button></div></details>
+    <article id="gss-net" class="network-method">
+      <div class="section-heading"><h2>Generative Shadow Synthesis Network (GSS-Net)</h2></div>
+      <figure class="paper-figure"><button class="figure-zoom" data-figure="synthesis" aria-label="Enlarge GSS-Net architecture"><img src="assets/figures/synthesis.webp" width="1963" height="662" loading="lazy" alt="GSS-Net architecture: shadow-free background construction, shadow illumination attenuation, style correction, and local discriminator."></button></figure>
+      <p class="method-description">GSS-Net combines a shadow illumination attenuation (SIA) model with a style correction generator. The illumination model produces initial synthetic shadows, and the generator refines their appearance using real shadow imagery with a local discriminator. Together with the corresponding shadow-free backgrounds, these synthesized images form the paired RS-SynShadow dataset for training the shadow removal network.</p>
+    </article>
+    <article id="gsr-net" class="network-method">
+      <div class="section-heading"><h2>Generative Shadow Removal Network (GSR-Net)</h2></div>
+      <figure class="paper-figure"><button class="figure-zoom" data-figure="removal" aria-label="Enlarge GSR-Net architecture"><img src="assets/figures/removal.webp" width="1916" height="838" loading="lazy" alt="GSR-Net architecture with umbra and penumbra processing, histogram-enhanced illumination, color and structure encoders, and cascaded decoder."></button></figure>
+      <p class="method-description">GSR-Net incorporates a histogram-enhanced illumination (HEI) model to obtain a detail-enhanced image from the shadow input. Color and structure encoders extract complementary features, which are combined through adaptive feature fusion and cross-attention fusion. A cascaded decoder reconstructs the shadow-free image, with umbra and penumbra processing providing shadow-region information.</p>
+    </article>
   </section>
 
   <section id="synthesis" class="section muted-section"><div class="container">

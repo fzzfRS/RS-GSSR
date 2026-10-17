@@ -91,15 +91,7 @@
     }
   }
 
-  const hero = $('#hero-showcase');
-  if (hero) {
-    for (const id of ['chicago28_sub10', 'austin28_sub9', 'vienna35_sub1']) {
-      const item = data.gallery.find(scene => scene.id === id);
-      if (!item) continue;
-      const card = create('div', 'hero-example');
-      card.append(comparison(item.input, item.output, item.id, true), create('p', '', `${item.city} · ${item.id}`));
-      hero.append(card);
-    }
+  if (document.body.classList.contains('project-page')) {
     imageRows($('#synthesis-results'), data.synthesis);
     imageRows($('#synthetic-removal-results'), data.syntheticRemoval);
     for (const dataset of ['aisd', 'asd']) buildDataset(dataset);
